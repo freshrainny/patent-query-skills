@@ -59,6 +59,12 @@ def norm(n):
     return s.upper()
 ```
 
+申请号（13 位数字 + 校验位）与公开号/授权公告号（`CN`+数字+末位类型字母 A/B/U/S）是两套编码，不能直接比数字；判定同一专利只按申请号、前 13 位一致即同一专利。多来源清单按归一化申请号去重，避免重复查询：
+
+```python
+uniq = list({norm(x): x for x in raw_numbers}.values())
+```
+
 ## 5. 单条查询（含校验与重试）
 
 ```python
